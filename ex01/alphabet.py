@@ -1,6 +1,6 @@
 
 import random
-import datetime
+import time
 
 all_alphabet = 26
 line_alphabet = 10
@@ -9,8 +9,9 @@ challenge = 2
 
 def out_q(alphabet):
     all_chr = random.sample(alphabet, line_alphabet)
+    print("対象:",end="")
     for c in sorted(all_chr):
-        print("対象：",end=" ")
+        print(c,end=" ")
     print()
 
     delet = random.sample(all_chr,line_alphabet)
@@ -39,12 +40,12 @@ def ans(anser):
             return True
         return False
 
-    if __name__ == "__main__":
-        alphabet = [chr(i+65) for i in range(all_alphabet)]
-        for _ in range(challenge):
-            Delete = out_q(alphabet)
-            ret = ans(Delete)
-            if ret:
-                break
-            else:
-                print("*"*20)
+if __name__ == "__main__":
+    alphabet = [chr(i+65) for i in range(all_alphabet)]
+    for _ in range(challenge):
+        Delete = out_q(alphabet)
+        ret = ans(Delete)
+        if ret:
+            break
+        else:
+            print("*"*20)
