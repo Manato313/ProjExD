@@ -36,7 +36,7 @@ def ans(anser):
             else:
                 anser.remove(c)
         else:
-            print("お！すごいやん兄ちゃん！完ペキやで！")
+            print("お！!!すごいやん兄ちゃん！完ペキやで！")
             return True
         return False
 
