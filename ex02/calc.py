@@ -13,7 +13,7 @@ def click_equal(event):
     entry.insert(tk.END, res)
 
 root = tk.Tk()
-root.geometry("400x600")
+root.geometry("390x500")
 
 entry = tk.Entry(root, width = 14, font = ("", 40), justify = "right")
 entry.grid(row = 0, column = 0, columnspan = 5)
