@@ -4,7 +4,8 @@ import tkinter.messagebox as tkm
 def click_number(event):
     btn = event.widget
     num = int(btn["text"])
-    tkm.showinfo(f"{num}", f"{num}がおされました")
+    #tkm.showinfo(f"{num}", f"{num}がおされました")
+    entry.insert(tk.END,num)
 
 root = tk.Tk()
 root.geometry("300x500")
