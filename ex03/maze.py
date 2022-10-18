@@ -11,15 +11,27 @@ def key_up(event):
     key = "" #演習6
 
 def main_proc():
+    global mx, my
     global cx, cy
     if key == "Up":
-        cy -= 20
+        my -= 1
     if key == "Down":
-        cy += 20
+        my += 1
     if key == "Right":
-        cx += 20
+        mx += 1
     if key == "Left":
-        cx -= 20
+        mx -= 1
+    if maze_list[my][mx] == 0:
+        cx,cy = mx*100+50, my*100+50
+    else:
+        if key == "Up":
+            my -= 20
+        if key == "Down":
+            my += 20
+        if key == "Right":
+            mx += 20
+        if key == "Left":
+            mx -= 20
     canv.coords("tori", cx,cy)
     root.after(100,main_proc)
     
@@ -31,8 +43,12 @@ if __name__ == "__main__":
     canv = tk.Canvas(width = 1500,height = 900, bg = "black")#演習2
     canv.pack()
 
+    maze_list = mm.make_maze(15, 9)
+    mm.show_maze(canv,maze_list)
+
     tori = tk.PhotoImage(file = "fig/7.png")
-    cx, cy = 300, 400
+    mx, my = 1, 1
+    cx, cy = mx*100+50, my*100+50
     canv.create_image(cx, cy, image = tori, tag = "tori")#演習3
 
     key = ""#演習4
@@ -42,8 +58,5 @@ if __name__ == "__main__":
 
     #演習7
     main_proc()
-    
-    maze_list = mm.make_maze(15, 9)
-    mm.show_maze(canv,maze_list)
 
     root.mainloop()
