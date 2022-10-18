@@ -12,7 +12,38 @@ def key_up(event):
 def main_proc():
     global jump_stock
     global mx, my
-    global cx, cy
+    global cx, cy, tori
+    canv.coords("tori", cx,cy)
+    if key == "1":
+        tori = tk.PhotoImage(file = "fig/1.png")
+        bid = canv.create_image(cx, cy, image = tori, tag = "tori")
+    if key == "2":
+        tori = tk.PhotoImage(file = "fig/2.png")
+        bid = canv.create_image(cx, cy, image = tori, tag = "tori")
+    if key == "3":
+        tori = tk.PhotoImage(file = "fig/3.png")
+        bid = canv.create_image(cx, cy, image = tori, tag = "tori")
+    if key == "4":
+        tori = tk.PhotoImage(file = "fig/4.png")
+        bid = canv.create_image(cx, cy, image = tori, tag = "tori")
+    if key == "5":
+        tori = tk.PhotoImage(file = "fig/5.png")
+        bid = canv.create_image(cx, cy, image = tori, tag = "tori")
+    if key == "6":
+        tori = tk.PhotoImage(file = "fig/6.png")
+        bid = canv.create_image(cx, cy, image = tori, tag = "tori")
+    if key == "7":
+        tori = tk.PhotoImage(file = "fig/7.png")
+        bid = canv.create_image(cx, cy, image = tori, tag = "tori")
+    if key == "8":
+        tori = tk.PhotoImage(file = "fig/8.png")
+        bid = canv.create_image(cx, cy, image = tori, tag = "tori")
+    if key == "9":
+        tori = tk.PhotoImage(file = "fig/9.png")
+        bid = canv.create_image(cx, cy, image = tori, tag = "tori")
+    if key == "0":
+        tori = tk.PhotoImage(file = "fig/0.png")
+        bid = canv.create_image(cx, cy, image = tori, tag = "tori")
     if key == "Up":
         my -= 1
         if jump_stock == 1:
@@ -48,7 +79,7 @@ def main_proc():
             mx -= 1
         if key == "Left":
             mx += 1
-    canv.coords("tori", cx,cy)
+    
     root.after(100,main_proc)
     
 
@@ -63,10 +94,10 @@ if __name__ == "__main__":
     maze_list= mm.make_maze(15, 9)
     mm.show_maze(canv,maze_list)
 
-    tori = tk.PhotoImage(file = "fig/7.png")
+    tori = tk.PhotoImage(file = "fig/1.png")
     mx, my = 1, 1
     cx, cy = mx*100+50, my*100+50
-    canv.create_image(cx, cy, image = tori, tag = "tori")#演習3
+    bid = canv.create_image(cx, cy, image = tori, tag = "tori")#演習3
 
     key = ""#演習4
 
