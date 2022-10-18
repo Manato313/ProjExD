@@ -72,7 +72,6 @@ def main_proc():
 
     if key == "space":
         jump_stock = 1
-        
     if maze_list[my][mx] == 0:
         cx,cy = mx*100+50, my*100+50
     else:
