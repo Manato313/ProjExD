@@ -1,4 +1,6 @@
+import imp
 import tkinter as tk
+import maze_maker as mm #演習8
 
 def key_down(event):
     global key
@@ -40,5 +42,8 @@ if __name__ == "__main__":
 
     #演習7
     main_proc()
+    
+    maze_list = mm.make_maze(15, 9)
+    mm.show_maze(canv,maze_list)
 
     root.mainloop()
