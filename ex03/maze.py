@@ -14,6 +14,7 @@ def main_proc():
     global mx, my
     global cx, cy, tori
     canv.coords("tori", cx,cy)
+
     if key == "1":
         tori = tk.PhotoImage(file = "fig/1.png")
         bid = canv.create_image(cx, cy, image = tori, tag = "tori")
@@ -44,6 +45,7 @@ def main_proc():
     if key == "0":
         tori = tk.PhotoImage(file = "fig/0.png")
         bid = canv.create_image(cx, cy, image = tori, tag = "tori")
+
     if key == "Up":
         my -= 1
         if jump_stock == 1:
@@ -64,10 +66,13 @@ def main_proc():
         if jump_stock == 1:
             mx -= 1
             jump_stock = 0
+
     if key == "BackSpace":
         mx, my = 1, 1
+
     if key == "space":
         jump_stock = 1
+
     if maze_list[my][mx] == 0:
         cx,cy = mx*100+50, my*100+50
     else:
