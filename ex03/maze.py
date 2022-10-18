@@ -1,4 +1,3 @@
-import imp
 import tkinter as tk
 import maze_maker as mm #演習8
 
@@ -11,39 +10,57 @@ def key_up(event):
     key = "" #演習6
 
 def main_proc():
+    global jump_stock
     global mx, my
     global cx, cy
     if key == "Up":
         my -= 1
+        if jump_stock == 1:
+            my -= 1
+            jump_stock = 0
     if key == "Down":
         my += 1
+        if jump_stock == 1:
+            my += 1
+            jump_stock = 0
     if key == "Right":
         mx += 1
+        if jump_stock == 1:
+            mx += 1
+            jump_stock = 0
     if key == "Left":
         mx -= 1
+        if jump_stock == 1:
+            mx -= 1
+            jump_stock = 0
+    if key == "BackSpace":
+        mx, my = 1, 1
+    if key == "space":
+        jump_stock = 1
     if maze_list[my][mx] == 0:
         cx,cy = mx*100+50, my*100+50
     else:
         if key == "Up":
-            my -= 20
+            my += 1
         if key == "Down":
-            my += 20
+            my -= 1
         if key == "Right":
-            mx += 20
+            mx -= 1
         if key == "Left":
-            mx -= 20
+            mx += 1
     canv.coords("tori", cx,cy)
     root.after(100,main_proc)
     
 
 if __name__ == "__main__":
+    jump_stock = 0
     root = tk.Tk()
     root.title("迷えるこうかとん")#演習1
 
     canv = tk.Canvas(width = 1500,height = 900, bg = "black")#演習2
     canv.pack()
 
-    maze_list = mm.make_maze(15, 9)
+    maze_list= mm.make_maze(15, 9)
     mm.show_maze(canv,maze_list)
 
     tori = tk.PhotoImage(file = "fig/7.png")

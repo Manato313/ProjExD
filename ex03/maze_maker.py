@@ -20,12 +20,11 @@ def make_maze(yoko, tate):
         for x in range(2, yoko-2, 2):
             if x > 2: rnd = random.randint(0, 2)
             else:     rnd = random.randint(0, 3)
-            maze_lst[y+YP[rnd]][x+XP[rnd]] = 1
-
+            maze_lst[y+YP[rnd]][x+XP[rnd]] = 1 
     return maze_lst
 
 def show_maze(canvas, maze_lst):
-    color = ["white", "gray"]
+    color = ["brown", "green"]
     for y in range(len(maze_lst)):
         for x in range(len(maze_lst[y])):
             canvas.create_rectangle(x*100, y*100, x*100+100, y*100+100, 
