@@ -43,7 +43,7 @@ def main():
     bomb_rct2.centerx = randint(0, scrn_rct.width)
     bomb_rct2.centery = randint(0, scrn_rct.height)
 
-    vx, vy = +1, +1
+    vx, vy = +3, +3
     vx2, vy2 = +2, +2
 
 
