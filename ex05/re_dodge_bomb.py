@@ -1,11 +1,8 @@
-from winsound import PlaySound
 import pygame as pg
 import sys
 from random import randint
 import os
 import time
-
-from yaml import load
 
 class Screen:
     def __init__(self, title, wh, bgimg):
