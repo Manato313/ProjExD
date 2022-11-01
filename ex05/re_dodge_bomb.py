@@ -131,13 +131,13 @@ def main():
         if kkt.rct.colliderect(bkd1.rct):
             pg.mixer.music.stop
             dath_sound.play()
-            time.time(3)
+            time.sleep(3)
             return
 
         if kkt.rct.colliderect(bkd2.rct):
             pg.mixer.music.stop
             dath_sound.play()
-            time.time(3)
+            time.sleep(3)
             return
 
         pg.display.update() 
