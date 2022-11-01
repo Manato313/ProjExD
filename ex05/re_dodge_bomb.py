@@ -1,7 +1,11 @@
+from winsound import PlaySound
 import pygame as pg
 import sys
 from random import randint
 import os
+import time
+
+from yaml import load
 
 class Screen:
     def __init__(self, title, wh, bgimg):
@@ -82,18 +86,21 @@ def check_bound(obj_rct, scr_rct):
         tate = -1
     return yoko, tate
 
+
 main_dir = os.path.split(os.path.abspath(__file__))[0]
 
-def load_sound(file):
-    if not pg.mixer:
+
+class Sound:
+    def load_sound(file):
+        if not pg.mixer:
+            return None
+        file = os.path.join(main_dir, "data", file)
+        try:
+            sound = pg.mixer.Sound(file)
+            return sound
+        except pg.error:
+            print("Warning, unable to load, %s" % file)
         return None
-    file = os.path.join(main_dir, "data", file)
-    try:
-        sound = pg.mixer.Sound(file)
-        return sound
-    except pg.error:
-        print("Warning, unable to load, %s" % file)
-    return None
 
 def main():
 
@@ -104,7 +111,11 @@ def main():
     bkd1 = Bomb((255, 0, 0), 10, (+1, +1), scr)
     bkd2 = Bomb((0, 255, 0), 30, (+3, +3), scr)
 
+    bgm = Sound.load_sound("bgm1.mp3")
+    dath_sound = Sound.load_sound("miss!.mp3")
+
     clock = pg.time.Clock() 
+    bgm.play()
     while True:
         scr.blit() 
         
@@ -118,9 +129,15 @@ def main():
         bkd2.update(scr)
 
         if kkt.rct.colliderect(bkd1.rct):
+            pg.mixer.music.stop
+            dath_sound.play()
+            time.time(3)
             return
 
         if kkt.rct.colliderect(bkd2.rct):
+            pg.mixer.music.stop
+            dath_sound.play()
+            time.time(3)
             return
 
         pg.display.update() 
