@@ -17,6 +17,17 @@ class Screen:
         self.sfc.blit(self.bgi_sfc, self.bgi_rct)
 
 
+class rdy_fight():
+    def __init__(self, img, zoom, xy):
+        sfc = pg.image.load(img) 
+        self.sfc = pg.transform.rotozoom(sfc, 0, zoom)
+        self.rct = self.sfc.get_rect()
+        self.rct.center = xy
+
+    def blit(self):
+        self.sfc.blit(self.sfc, self.rct)
+
+
 #class Mode:
 #    def __init__(self,level):
 #        self.level = level
@@ -41,17 +52,35 @@ class Screen:
 
 def main():
 
-    scr = Screen("刹那test", (600, 800), "fig/pg_bg.jpg")
-    diley_frame = randint(2500,5000)
-    clock = pg.time.Clock() 
+    scr = Screen("刹那test", (1200, 800), "fig/pg_bg.jpg")
+    #fight = rdy_fight("fig/6.png", 2.0, (600, 300))
+    diley_frame = randint(2500,5000)# ms 2.5秒～5.0秒
+    clock = pg.time.Clock()
     flag = 0
     while True:
-        scr.blit() 
-        print (pg.time.get_ticks())
-        if pg.time.get_ticks() >= diley_frame:
-            pg.quit()
-        pg.display.update() 
+        scr.blit() # 背景表示
+        #print (pg.time.get_ticks()) #デバッグ用
+        #if pg.time.get_ticks() >= diley_frame:
+        #    fight.blit()
+        #    flag = 1 #フラグ1にする
+        #    img1 = pg.image.load("fig/5.png")
+            #Screen.blit(img1)
+        key_states = pg.key.get_pressed()
+        #print(key_states[pg.K_SPACE])
+        if key_states[pg.K_SPACE]:
+            return
+            if flag == 1:
+                return
+            if flag == 0:
+                return
+        for event in pg.event.get(): 
+            if event.type == pg.QUIT:
+                return
+
+        pg.display.update()
         clock.tick(1000)
+        
+
         
 
 
