@@ -1,5 +1,4 @@
 from random import randint
-import os
 import sys
 import time
 import pygame as pg
@@ -34,18 +33,18 @@ def main():
     #kkt_w = rdy_fight("fig/9.png", 2.0, (600,300))
     #kkt_l = rdy_fight("fig/8.png", 2.0, (600,300))
     #kkt_u = rdy_fight("fig/7.png", 2.0, (600,300))
-    cong_time = 0
+    cong_time = 0 
     diley_frame = randint(2500,5000)# ms 2.5秒～5.0秒
     clock = pg.time.Clock()
     flag = 0
     scr.blit() # 背景表示
     while True:
-        print (pg.time.get_ticks()) #デバッグ用
+        #print (pg.time.get_ticks()) #デバッグ用
         if pg.time.get_ticks() >= diley_frame:
             if cong_time == 0:
-                cong_time = pg.time.get_ticks()
+                cong_time = pg.time.get_ticks() # びっくりの瞬間を保存
             fight.blit(scr)
-            CPU = cong_time + randint(270,300)
+            CPU = cong_time + randint(270,300) # CPU設定
             flag = 1 #フラグ1にする
             if pg.time.get_ticks() >= CPU:
                 push_time = pg.time.get_ticks()
@@ -54,24 +53,21 @@ def main():
                 #kkt_l.blit(scr)
                 time.sleep(1)
                 return
-        key_states = pg.key.get_pressed()
-        if key_states[pg.K_SPACE]:
+        key_states = pg.key.get_pressed() # キーを検出
+        if key_states[pg.K_SPACE]: # スペースキーが検出
             push_time = pg.time.get_ticks()
-            if flag == 1:
-                print(f"time:{push_time - cong_time}ms" ) # 推した瞬間の時間
+            if flag == 1: # ちゃんとびっくりの後に押したら
+                print(f"time:{push_time - cong_time}ms" ) # おした瞬間の時間
                 print("1P WIN") # 勝利用
                 #kkt_w.blit(scr)
                 time.sleep(1)
                 return
-            if flag == 0:
+            if flag == 0: # びっくりの前に押したら
                 print("1P おてつき!")
                 #kkt_u.blit(scr)
                 time.sleep(1)
                 return
 
-            
-
-                
         for event in pg.event.get(): 
             if event.type == pg.QUIT:
                 return
@@ -79,9 +75,6 @@ def main():
         pg.display.update()
         clock.tick(1000)
         
-
-        
-
 
 if __name__ == "__main__":
     pg.init() # 初期化
