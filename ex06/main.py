@@ -31,23 +31,28 @@ def main():
 
     scr = Screen("刹那test", (1200, 800), "fig/pg_bg.jpg")
     fight = rdy_fight("fig/fight.png", 2.0, (600, 300))
+    #kkt_w = rdy_fight("fig/9.png", 2.0, (600,300))
+    #kkt_l = rdy_fight("fig/8.png", 2.0, (600,300))
+    #kkt_u = rdy_fight("fig/7.png", 2.0, (600,300))
     cong_time = 0
     diley_frame = randint(2500,5000)# ms 2.5秒～5.0秒
     clock = pg.time.Clock()
     flag = 0
+    scr.blit() # 背景表示
     while True:
-        scr.blit() # 背景表示
         print (pg.time.get_ticks()) #デバッグ用
         if pg.time.get_ticks() >= diley_frame:
             if cong_time == 0:
                 cong_time = pg.time.get_ticks()
             fight.blit(scr)
-            CPU = cong_time + randint(250,300)
+            CPU = cong_time + randint(270,300)
             flag = 1 #フラグ1にする
             if pg.time.get_ticks() >= CPU:
                 push_time = pg.time.get_ticks()
                 print(f"time:{push_time - cong_time}ms" )
                 print("CPU WIN") # 敗北用
+                #kkt_l.blit(scr)
+                time.sleep(1)
                 return
         key_states = pg.key.get_pressed()
         if key_states[pg.K_SPACE]:
@@ -55,9 +60,13 @@ def main():
             if flag == 1:
                 print(f"time:{push_time - cong_time}ms" ) # 推した瞬間の時間
                 print("1P WIN") # 勝利用
+                #kkt_w.blit(scr)
+                time.sleep(1)
                 return
             if flag == 0:
                 print("1P おてつき!")
+                #kkt_u.blit(scr)
+                time.sleep(1)
                 return
 
             
