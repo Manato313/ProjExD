@@ -27,33 +27,11 @@ class rdy_fight():
     def blit(self, scr:Screen):
         scr.sfc.blit(self.sfc, self.rct)
 
-
-#class Mode:
-#    def __init__(self,level):
-#        self.level = level
-#
-#    def title(): # level変更機能
-#        pg.init() 
-#        pg.display
-#        screen.fill
-#        level = 1
-#        while(True):
-#            key_states = pg.key.get_pressed()
-#            if key_states[pg.K_UP]: level += 1
-#            if level == 6: level = 5
-#            if key_states[pg.K_DOWN]: level -= 1
-#            if level == 0: level = 1
-#            
-#            if key_states[pg.K_SPACE]:
-#                return level
-
-
-
-
 def main():
 
     scr = Screen("刹那test", (1200, 800), "fig/pg_bg.jpg")
-    fight = rdy_fight("fig/6.png", 2.0, (600, 300))
+    fight = rdy_fight("fig/fight.png", 2.0, (600, 300))
+    cong_time = 0
     diley_frame = randint(2500,5000)# ms 2.5秒～5.0秒
     clock = pg.time.Clock()
     flag = 0
@@ -61,14 +39,30 @@ def main():
         scr.blit() # 背景表示
         print (pg.time.get_ticks()) #デバッグ用
         if pg.time.get_ticks() >= diley_frame:
+            if cong_time == 0:
+                cong_time = pg.time.get_ticks()
             fight.blit(scr)
+            CPU = cong_time + randint(250,300)
             flag = 1 #フラグ1にする
+            if pg.time.get_ticks() >= CPU:
+                push_time = pg.time.get_ticks()
+                print(f"time:{push_time - cong_time}ms" )
+                print("CPU WIN") # 敗北用
+                return
         key_states = pg.key.get_pressed()
         if key_states[pg.K_SPACE]:
+            push_time = pg.time.get_ticks()
             if flag == 1:
+                print(f"time:{push_time - cong_time}ms" ) # 推した瞬間の時間
+                print("1P WIN") # 勝利用
                 return
             if flag == 0:
+                print("1P おてつき!")
                 return
+
+            
+
+                
         for event in pg.event.get(): 
             if event.type == pg.QUIT:
                 return
