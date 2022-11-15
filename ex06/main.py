@@ -26,6 +26,16 @@ class rdy_fight():
     def blit(self, scr:Screen):
         scr.sfc.blit(self.sfc, self.rct)
 
+class Shot:#スペースを押したら
+    def __init__(self,file):
+        pg.mixer.init() #初期化
+        pg.mixer.music.load(file) #読み込み
+
+    def sound(self):#音を鳴らす
+        pg.mixer.music.play(1) #再生
+        time.sleep(1)
+        pg.mixer.music.stop() #終了
+
 def main():
 
     scr = Screen("刹那test", (1200, 800), "fig/pg_bg.jpg")
@@ -51,7 +61,7 @@ def main():
                 print(f"time:{push_time - cong_time}ms" )
                 print("CPU WIN") # 敗北用
                 #kkt_l.blit(scr)
-                time.sleep(1)
+                #time.sleep(1)
                 return
         key_states = pg.key.get_pressed() # キーを検出
         if key_states[pg.K_SPACE]: # スペースキーが検出
@@ -59,9 +69,12 @@ def main():
             if flag == 1: # ちゃんとびっくりの後に押したら
                 print(f"time:{push_time - cong_time}ms" ) # おした瞬間の時間
                 print("1P WIN") # 勝利用
+                ds=Shot("fig/stabbing.mp3")
+                ds.sound()
                 #kkt_w.blit(scr)
                 time.sleep(1)
                 return
+            
             if flag == 0: # びっくりの前に押したら
                 print("1P おてつき!")
                 #kkt_u.blit(scr)
