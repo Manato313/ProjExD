@@ -21,7 +21,7 @@ class img():#画像表示
         sfc = pg.image.load(img) 
         self.sfc = pg.transform.rotozoom(sfc, 0, zoom)
         self.rct = self.sfc.get_rect()
-        self.rct.center = xy
+        self.rct.center =  xy
 
     def blit(self, scr:Screen):
         scr.sfc.blit(self.sfc, self.rct)
@@ -36,6 +36,7 @@ class Shot:#スペースを押したら
         time.sleep(1)
         pg.mixer.music.stop() #終了
 
+
 def main():
 
     scr = Screen("刹那test", (700, 600), "fig/yuyake.png")
@@ -43,22 +44,26 @@ def main():
     tori = img("fig/9.png", 2.0, (550, 450))
     blue_tori = img("fig/bluebird.png", 0.2, (170, 450))
     kanban = img("fig/kanban.png", 0.5, (10,0))
-    cong_time = 0 
+    cong_time = 0    
     diley_frame = randint(2500,5000)# ms 2.5秒～5.0秒
     clock = pg.time.Clock()
-    flag = 0
+    flag = False
+    
     while True:
         scr.blit()
         tori.blit(scr)
         blue_tori.blit(scr)
         #print (pg.time.get_ticks()) #デバッグ用
+       
         if pg.time.get_ticks() >= diley_frame:
             time_sta = time.perf_counter()
+            
             if cong_time == 0:
                 cong_time = pg.time.get_ticks() # びっくりの瞬間を保存
             fight.blit(scr)#びっくりを表示
             CPU = cong_time + randint(270,300) # CPU設定
-            flag = 1 #フラグ1にする
+            flag = True #フラグ1にする
+            
             if pg.time.get_ticks() >= CPU:
                 push_time = pg.time.get_ticks()
                 kanban.blit(scr)#時間を表示する看板
@@ -73,10 +78,13 @@ def main():
                 #kkt_l.blit(scr)
                 time.sleep(3)
                 return
+        
         key_states = pg.key.get_pressed() # キーを検出
+        
         if key_states[pg.K_SPACE]: # スペースキーが検出
             push_time = pg.time.get_ticks()
-            if flag == 1: # ちゃんとびっくりの後に押したら
+            
+            if flag : # ちゃんとびっくりの後に押したら
                 #勝利時間の画面表示
                 fonto = pg.font.Font(None, 60)
                 kanban.blit(scr)#時間を表示する看板
@@ -94,7 +102,7 @@ def main():
                 time.sleep(3)
                 return
             
-            if flag == 0: # びっくりの前に押したら
+            if not flag: # びっくりの前に押したら
                 fonto = pg.font.Font("font/ipaexg.ttf", 80)
                 txt = fonto.render("おてつき!!!!", True, (0,0,0))
                 scr.sfc.blit(txt, (170,250))
